@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
-  //const Home({ Key? key }) : super(key: key);
-
   @override
   State<Home> createState() => _HomeState();
 }
@@ -12,9 +10,9 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    data = ModalRoute.of(context)!.settings.arguments as Map;
+    data = data.isNotEmpty ? data : ModalRoute.of(context)!.settings.arguments as Map;
 
-    // Set background   
+    // Set background
     String bgImage = data['isDayTime'] ? 'day.jpg' : 'night.jpg';
     Color? bgColor = data['isDayTime'] ? Colors.blue[700] : Color(0xff1f3249);
 
@@ -29,12 +27,27 @@ class _HomeState extends State<Home> {
             )
           ),
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 120, 0, 0),
+            padding: const EdgeInsets.fromLTRB(0, 160, 0, 0),
             child: Column(
               children: [
                 TextButton.icon(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/location');
+                  onPressed: () async {
+                    // If result is null, set the new state with the old values
+                    dynamic result = await Navigator.pushNamed(context, '/location') ?? {
+                          'time': data['time'],
+                          'location': data['location'],
+                          'isDayTime': data['isDayTime'],
+                          'flag': data['flag']
+                        };
+                    
+                    setState(() {
+                      data = {
+                        'time': result['time'],
+                        'location': result['location'],
+                        'isDayTime': result['isDayTime'],
+                        'flag': result['flag']
+                      };
+                    });
                   },
                   icon: Icon(
                     Icons.edit_location,
@@ -45,7 +58,8 @@ class _HomeState extends State<Home> {
                     'Edit Location',
                     style: TextStyle(
                       color: Colors.grey[200],
-                      fontSize: 16.0,
+                      fontSize: 18.0,
+                      letterSpacing: 1.0,
                     ),
                   ),
                 ),
@@ -56,8 +70,10 @@ class _HomeState extends State<Home> {
                     Text(
                       data['location'],
                       style: TextStyle(
+                        color: Colors.grey[200],
+                        fontWeight: FontWeight.w600,
                         fontSize: 28.0,
-                        letterSpacing: 2.0,
+                        letterSpacing: 4.0,
                       ),
                     )
                   ],
@@ -66,6 +82,7 @@ class _HomeState extends State<Home> {
                 Text(
                   data['time'],
                   style: TextStyle(
+                    color: Colors.grey[200],
                     fontSize: 66.0,
                   ),
                 )
