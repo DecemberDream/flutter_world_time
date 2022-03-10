@@ -1,16 +1,13 @@
-# flutter_world_time
+# World Time
 
-A new Flutter project.
+This is a simple Flutter project which makes use of the [WorldTimeAPI](https://worldtimeapi.org/) to fetch the times of many cities world wide.
 
-## Getting Started
+## The App
 
-This project is a starting point for a Flutter application.
+Essentially, the app has 2 screens, including a loading screen. The home screen looks as follows (note: this background is chosen if the time is between 6am - 8pm).
 
-A few resources to get you started if this is your first Flutter project:
+[![seoul.png](https://i.postimg.cc/Kv80v8rH/seoul.png)](https://postimg.cc/9zsdLVkd)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+In order to change the city, click on 'Edit Location'. The following screen shows the implemented cities:
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+[![locations.png](https://i.postimg.cc/NfCpyvdf/locations.png)](https://postimg.cc/PPZmc9GB)
