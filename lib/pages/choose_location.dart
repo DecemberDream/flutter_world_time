@@ -53,6 +53,7 @@ class _ChooseLocationState extends State<ChooseLocation> {
         elevation: 0,
       ),
       body: ListView.builder(
+        physics: AlwaysScrollableScrollPhysics(),
         itemCount: locations.length,
         itemBuilder: (context, index) {
           return Padding(
