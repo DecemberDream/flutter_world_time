@@ -45,9 +45,9 @@ class _ChooseLocationState extends State<ChooseLocation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.grey[800],
       appBar: AppBar(
-        backgroundColor: Colors.blue[900],
+        backgroundColor: Colors.grey[900],
         title: Text('Choose a Location'),
         centerTitle: true,
         elevation: 0,
@@ -62,7 +62,7 @@ class _ChooseLocationState extends State<ChooseLocation> {
               horizontal: 4.0,
             ),
             child: Card(
-              color: Colors.grey[200],
+              color: Colors.grey[900],
               child: ListTile(
                 onTap: () {
                   updateTime(index);
@@ -71,6 +71,7 @@ class _ChooseLocationState extends State<ChooseLocation> {
                   locations[index].location + ', ' + getCountry(locations[index].flag),
                   style: TextStyle(
                     letterSpacing: 1.0,
+                    color: Colors.grey[300],
                   ),
                 ),
                 leading: ClipRRect(
