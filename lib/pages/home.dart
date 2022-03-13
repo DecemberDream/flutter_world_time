@@ -81,9 +81,12 @@ class _HomeState extends State<Home> {
                 SizedBox(height: 20.0),
                 Text(
                   data['time'],
-                  style: TextStyle(
+                  style: data['time'].contains(new RegExp(r'[0-9]')) ? TextStyle(
                     color: Colors.grey[200],
                     fontSize: 66.0,
+                  ) : TextStyle(
+                    color: Colors.grey[200],
+                    fontSize: 26.0,
                   ),
                 )
               ],
