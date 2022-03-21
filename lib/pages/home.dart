@@ -10,7 +10,9 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    data = data.isNotEmpty ? data : ModalRoute.of(context)!.settings.arguments as Map;
+    data = data.isNotEmpty
+        ? data
+        : ModalRoute.of(context)!.settings.arguments as Map;
 
     // Set background
     String bgImage = data['isDayTime'] ? 'day.jpg' : 'night.jpg';
@@ -21,11 +23,10 @@ class _HomeState extends State<Home> {
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/$bgImage'),
-              fit: BoxFit.cover,
-            )
-          ),
+              image: DecorationImage(
+            image: AssetImage('assets/$bgImage'),
+            fit: BoxFit.cover,
+          )),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(0, 160, 0, 0),
             child: Column(
@@ -33,13 +34,15 @@ class _HomeState extends State<Home> {
                 TextButton.icon(
                   onPressed: () async {
                     // If result is null, set the new state with the old values
-                    dynamic result = await Navigator.pushNamed(context, '/location') ?? {
-                          'time': data['time'],
-                          'location': data['location'],
-                          'isDayTime': data['isDayTime'],
-                          'flag': data['flag']
-                        };
-                    
+                    dynamic result =
+                        await Navigator.pushNamed(context, '/location') ??
+                            {
+                              'time': data['time'],
+                              'location': data['location'],
+                              'isDayTime': data['isDayTime'],
+                              'flag': data['flag']
+                            };
+
                     setState(() {
                       data = {
                         'time': result['time'],
@@ -81,13 +84,15 @@ class _HomeState extends State<Home> {
                 SizedBox(height: 20.0),
                 Text(
                   data['time'],
-                  style: data['time'].contains(new RegExp(r'[0-9]')) ? TextStyle(
-                    color: Colors.grey[200],
-                    fontSize: 66.0,
-                  ) : TextStyle(
-                    color: Colors.grey[200],
-                    fontSize: 26.0,
-                  ),
+                  style: data['time'].contains(new RegExp(r'[0-9]'))
+                      ? TextStyle(
+                          color: Colors.grey[200],
+                          fontSize: 66.0,
+                        )
+                      : TextStyle(
+                          color: Colors.grey[200],
+                          fontSize: 26.0,
+                        ),
                 )
               ],
             ),

@@ -14,11 +14,20 @@ class _ChooseLocationState extends State<ChooseLocation> {
     WorldTime(url: 'Asia/Seoul', location: 'Seoul', flag: 'South-Korea.png'),
     WorldTime(url: 'Asia/Jakarta', location: 'Jakarta', flag: 'Indonesia.png'),
     WorldTime(url: 'Asia/Tokyo', location: 'Tokyo', flag: 'Japan.png'),
-    WorldTime(url: 'America/Chicago', location: 'Chicago', flag: 'United-States.png'),
-    WorldTime(url: 'America/New_York', location: 'New York', flag: 'United-States.png'),
-    WorldTime(url: 'America/Los_Angeles', location: 'Los Angeles', flag: 'United-States.png'),
-    WorldTime(url: 'Australia/Sydney', location: 'Sydney', flag: 'Australia.png'),
-    WorldTime(url: 'Europe/London', location: 'London', flag: 'United-Kingdom.png'),
+    WorldTime(
+        url: 'America/Chicago', location: 'Chicago', flag: 'United-States.png'),
+    WorldTime(
+        url: 'America/New_York',
+        location: 'New York',
+        flag: 'United-States.png'),
+    WorldTime(
+        url: 'America/Los_Angeles',
+        location: 'Los Angeles',
+        flag: 'United-States.png'),
+    WorldTime(
+        url: 'Australia/Sydney', location: 'Sydney', flag: 'Australia.png'),
+    WorldTime(
+        url: 'Europe/London', location: 'London', flag: 'United-Kingdom.png'),
     WorldTime(url: 'Europe/Berlin', location: 'Athens', flag: 'Greece.png'),
     WorldTime(url: 'Europe/Vilnius', location: 'Vilnius', flag: 'Lithuania.png')
   ];
@@ -35,13 +44,18 @@ class _ChooseLocationState extends State<ChooseLocation> {
   }
 
   String replaceCharAt(String oldString, int index, String newChar) {
-    return index > 0 ? oldString.substring(0, index) + newChar + oldString.substring(index + 1) : oldString;
+    return index > 0
+        ? oldString.substring(0, index) +
+            newChar +
+            oldString.substring(index + 1)
+        : oldString;
   }
 
   String getCountry(String flag) {
-    return replaceCharAt(flag.substring(0, flag.length - 4), flag.substring(0, flag.length - 4).indexOf('-'), ' ');
+    return replaceCharAt(flag.substring(0, flag.length - 4),
+        flag.substring(0, flag.length - 4).indexOf('-'), ' ');
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +82,9 @@ class _ChooseLocationState extends State<ChooseLocation> {
                   updateTime(index);
                 },
                 title: Text(
-                  locations[index].location + ', ' + getCountry(locations[index].flag),
+                  locations[index].location +
+                      ', ' +
+                      getCountry(locations[index].flag),
                   style: TextStyle(
                     letterSpacing: 1.0,
                     color: Colors.grey[300],
