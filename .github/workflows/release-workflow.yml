@@ -1,6 +1,9 @@
 name: Flutter CI Release
 
-on: [workflow_dispatch]
+on: 
+  push:
+    tags:
+      - '*'
 
 jobs:
   releases:
