@@ -19,7 +19,6 @@ jobs:
           channel: 'beta'
       - run: flutter pub get
       - run: flutter analyze
-      - run: flutter test
       - run: flutter build apk --release
       - uses: ncipollo/release-action@v1
         with:
