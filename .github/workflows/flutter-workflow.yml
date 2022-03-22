@@ -2,19 +2,22 @@ name: Flutter CI
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - 'v*'
 
 jobs:
   build:
     name: Build application
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-java@v1
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Java
+        uses: actions/setup-java@v3
         with:
           java-version: '12.x'
-      - uses: subosito/flutter-action@v1
+      - name: Flutter action
+        uses: subosito/flutter-action@v2.3.0
         with:
           channel: 'beta'
       - name: Get dependencies
@@ -25,10 +28,10 @@ jobs:
         run: flutter analyze .
       - name: Build Android application
         run: flutter build apk
-      - name: Upload Android application
-        uses: actions/upload-artifact@v1
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
         with:
-          name: release-apk-v1.${{ github.run_number }}
+          name: release-apk-${{ github.ref }}
           path: build/app/outputs/apk/release/app-release.apk
   release:
     name: Release application to GitHub Releases
@@ -36,7 +39,7 @@ jobs:
     needs: build
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: release-apk
       - name: Create GitHub Release
@@ -45,14 +48,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v1.${{ github.run_number }}
-          release_name: Flutter WorldTime v1.${{ github.run_number }}
+          tag_name: ${{ github.ref }}
+          release_name: Flutter WorldTime ${{ github.ref }}
       - name: Upload asset to GitHub
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: shogo82148/actions-upload-release-asset@v1.6.0
         with:
           upload_url: ${{ steps.create-new-release.outputs.upload_url }}
-          asset_path: ./release-apk-v1.${{ github.run_number }}.zip
-          asset_name: flutter-worldtime-v1.${{ github.run_number }}.apk
-          asset_content_type: application/zip
+          asset_path: build/app/outputs/apk/release/app-release.apk
