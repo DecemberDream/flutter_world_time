@@ -28,7 +28,7 @@ jobs:
       - name: Upload Android application
         uses: actions/upload-artifact@v1
         with:
-          name: release-apk
+          name: release-apk-v1.${{ github.run_number }}
           path: build/app/outputs/apk/release/app-release.apk
   release:
     name: Release application to GitHub Releases
@@ -45,14 +45,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: 1.v${{ github.run_number }}
-          release_name: Flutter WorldTime V1.${{ github.run_number }}
+          tag_name: v1.${{ github.run_number }}
+          release_name: Flutter WorldTime v1.${{ github.run_number }}
       - name: Upload asset to GitHub
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create-new-release.outputs.upload_url }}
-          asset_path: build/app/outputs/flutter-apk/app-release.apk
+          asset_path: ./release-apk-v1.${{ github.run_number }}.zip
           asset_name: flutter-worldtime-v1.${{ github.run_number }}.apk
           asset_content_type: application/zip
