@@ -1,0 +1,17 @@
+name: Flutter CI Release
+
+on: [workflow_dispatch]
+
+jobs:     
+  release:
+    name: Release application to GitHub Releases
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: release-apk
+      - uses: ncipollo/release-action@v1
+        with:
+         artifacts: 'build/app/outputs/flutter-apk/*.apk'
+         token: $
