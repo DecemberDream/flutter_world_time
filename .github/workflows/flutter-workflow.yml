@@ -55,3 +55,4 @@ jobs:
           upload_url: ${{ steps.create-new-release.outputs.upload_url }}
           asset_path: build/app/outputs/apk/release/app-release.apk
           asset_name: flutter-worldtime-v${{ github.run_number }}
+          asset_content_type: application/zip
