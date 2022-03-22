@@ -2,16 +2,25 @@ name: Flutter CI Release
 
 on: [workflow_dispatch]
 
-jobs:     
-  release:
-    name: Release application to GitHub Releases
+jobs:
+  releases:
+    name: Release .apk
     runs-on: ubuntu-latest
+    env:
+      JAVA_VERSION: "12.x"
     steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v1
         with:
-          name: release-apk
+          java-version: $
+      - uses: subosito/flutter-action@v2.3.0
+        with:
+          flutter-version: $
+      - run: flutter pub get
+      - run: flutter analyze
+      - run: flutter test
+      - run: flutter build apk --release
       - uses: ncipollo/release-action@v1
         with:
-         artifacts: 'build/app/outputs/flutter-apk/*.apk'
+         artifacts: "build/app/outputs/flutter-apk/*.apk"
          token: $
