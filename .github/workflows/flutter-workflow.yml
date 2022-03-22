@@ -37,7 +37,8 @@ jobs:
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v2
-        with: release-apk
+        with:
+          name: release-apk
       - name: Create GitHub Release
         id: create-new-release
         uses: actions/create-release@v1
