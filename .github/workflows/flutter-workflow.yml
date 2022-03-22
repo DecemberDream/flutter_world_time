@@ -51,7 +51,7 @@ jobs:
           tag_name: 1.0
           release_name: Flutter WorldTime 1.0
       - name: Upload asset to GitHub
-        uses: ncipollo/release-action@v2
+        uses: ncipollo/release-action@v1
         with:
           artifacts: build/app/outputs/apk/release/app-release.apk
           token: $
